@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  my-database:
+    build:
+      context: ./database
+    container_name: my-database
+    image: my-database
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - my-red
+
+  my-backend:
+    build:
+      context: ./backend
+    container_name: my-backend
+    image: my-backend
+    ports:
+      - "8080:8080"
+    environment:
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://my-database:5432/postgres
+      QUARKUS_DATASOURCE_USERNAME: myuser
+      QUARKUS_DATASOURCE_PASSWORD: mypassword
+    depends_on:
+      - my-database
+    networks:
+      - my-red
+
+  my-frontend:
+    build:
+      context: ./frontend
+    container_name: my-frontend
+    image: my-frontend
+    ports:
+      - "4200:4200"
+    networks:
+      - my-red
+
+volumes:
+  pgdata:
+
+networks:
+  my-red:
+    driver: bridge
