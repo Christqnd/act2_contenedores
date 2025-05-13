@@ -1,4 +1,4 @@
-# Act1 Contenedores
+# Act2 Contenedores
 
 Este proyecto despliega una aplicación compuesta por tres servicios principales utilizando Docker:
 
@@ -8,70 +8,65 @@ Este proyecto despliega una aplicación compuesta por tres servicios principales
 
 Los servicios están interconectados mediante una red Docker personalizada, facilitando la comunicación entre ellos.
 
-## Tecnologías Utilizadas
+---
+
+## 🛠 Tecnologías Utilizadas
 
 - [Docker](https://www.docker.com/): Contenerización de servicios.
 - [PostgreSQL](https://www.postgresql.org/): Base de datos relacional.
-- [Quarkus](https://quarkus.io/): Framework para el backend.
-- [Angular](https://angular.io/): Framework para el frontend.
+- [Quarkus](https://quarkus.io/): Framework moderno para el backend en Java.
+- [Angular](https://angular.io/): Framework para el desarrollo del frontend.
 
-## Requisitos Previos
+---
 
-- Tener instalado [Docker](https://docs.docker.com/get-docker/).
-- Opcionalmente, tener instalado [Docker Compose](https://docs.docker.com/compose/install/) si se desea utilizar `docker-compose`.
-
-## Estructura del Proyecto
-
-El repositorio está organizado de la siguiente manera:
+## 📦 Estructura del Proyecto
 
 ```
-├── backend/             # Código fuente del backend (Quarkus)
-├── frontend/            # Código fuente del frontend (Angular)
-├── database/            # Archivos relacionados con la base de datos PostgreSQL
-├── 1-start-services.sh  # Script para iniciar los servicios (versión simple)
-├── 2-start-services.sh  # Script para iniciar los servicios con opciones adicionales
-├── clean-all.sh         # Script para detener y eliminar los contenedores y redes
-├── README.md            # Documentación del proyecto
-└── ...
+act2_contenedores/
+├── backend/                # Código fuente del backend en Quarkus
+├── frontend/               # Aplicación frontend en Angular
+├── database/               # Archivos de configuración de PostgreSQL
+├── docker-compose.yml      # Archivo principal de Docker Compose
+├── docker-compose2.yml     # Archivo alternativo para despliegue
+├── start.sh                # Script para levantar los servicios
+├── stop.sh                 # Script para detener y limpiar los contenedores
+└── README.md               # Este archivo
 ```
 
-## Instrucciones de Uso
+---
 
-### Clonar el Repositorio
+## ⚙️ Requisitos Previos
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/) (opcional, si no usas los scripts)
+
+---
+
+## 🚀 Uso
+
+### Levantar los Servicios
 
 ```bash
-git clone https://github.com/Christqnd/act1_contenedores.git
-cd act1_contenedores
+./start.sh
 ```
 
-### Iniciar los Servicios
+Esto creará una red de Docker y levantará los contenedores del backend, frontend y base de datos.
 
-Para iniciar los servicios, puedes utilizar uno de los scripts proporcionados:
+### Detener los Servicios
 
 ```bash
-./1-start-services.sh
+./stop.sh
 ```
 
-Este script construirá las imágenes necesarias y levantará los contenedores correspondientes.
+Este script detiene y elimina los contenedores, y opcionalmente la red.
 
-### Acceder a la Aplicación
+---
 
-- **Frontend (Angular)**: [http://localhost:4200](http://localhost:4200)
-- **Backend (Quarkus)**: [http://localhost:8080](http://localhost:8080)
-- **Base de Datos (PostgreSQL)**: Accesible en el puerto `5432`
+## 🌐 Acceso a los Servicios localmente
 
-### Detener y Limpiar los Servicios
+- **Frontend**: [http://localhost:4200](http://localhost:4200)
+- **Backend API**: [http://localhost:8080](http://localhost:8080)
+- **Base de Datos PostgreSQL**: Puerto `5432`
 
-Para detener y eliminar los contenedores, redes e imágenes creadas, ejecuta:
+---
 
-```bash
-./clean-all.sh
-```
-
-## Contribuciones
-
-Las contribuciones son bienvenidas. Si deseas mejorar este proyecto, por favor realiza un fork del repositorio y envía un pull request con tus cambios.
-
-## Licencia
-
-Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más información.
